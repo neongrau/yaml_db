@@ -19,7 +19,7 @@ namespace :db do
     desc "Dump contents of given tables to db/tables/tablename.extension (defaults to yaml)"
     task :dump_tables_dir => :environment do
       tables = ENV['tables'].to_s.split(',').collect(&:strip).compact.uniq
-      dir = ENV['dir'] ||= 'tables'
+      ENV['dir'] ||= 'tables'
       puts "Specify tables via # tables='table1,table2'" if tables.empty?
       YamlDb::RakeTasks.data_dump_tables_dir_task(tables)
     end
@@ -37,7 +37,7 @@ namespace :db do
     desc "Load contents of given tables from db/data_dir (default dir is 'tables') into database"
     task :load_tables_dir  => :environment do
       tables = ENV['tables'].to_s.split(',').collect(&:strip).compact.uniq
-      dir = ENV['dir'] ||= 'tables'
+      ENV['dir'] ||= 'tables'
       puts "Specify tables via # tables='table1,table2'" if tables.empty?
       YamlDb::RakeTasks.data_load_tables_dir_task(tables)
     end
